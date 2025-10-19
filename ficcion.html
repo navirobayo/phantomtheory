@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficción - Phantom Theory</title>
+  <meta name="description" content="Ciencia ficción cristiana y narrativas especulativas explorando el fin de los tiempos.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="logo">Phantom Theory ☦</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="ficcion.html">Ficción</a>
+        <a href="escatologia.html">Escatología</a>
+        <a href="index.html#about">¿Qué es Phantom Theory?</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="meta">Ciencia Ficción</div>
+      <h1>Narrativas Especulativas sobre el Fin de los Tiempos</h1>
+      <p class="lead">
+        Explorando el futuro de la humanidad a través de la lente de la teología cristiana y la ciencia ficción.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-header">
+      <div class="meta">Obras de Ficción</div>
+      <h2>Ciencia Ficción Cristiana</h2>
+      <p>Historias que exploran la intersección entre tecnología, fe y el destino de la humanidad.</p>
+    </div>
+
+    <div class="card-grid trio">
+      <div class="card">
+        <div class="category">Ciencia Ficción</div>
+        <h3>Evangelio 7x</h3>
+        <p>Una exploración visionaria de la trascendencia y transformación en la era de la convergencia tecnológica.</p>
+        <div class="card-actions">
+          <a href="downloads/evangelio-7x.pdf" class="btn primary" download>
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+            </svg>
+            Descargar PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="category">En Proceso</div>
+        <h3>Próximamente</h3>
+        <p>Más obras de ciencia ficción cristiana estarán disponibles próximamente.</p>
+        <div class="card-actions">
+          <button class="btn subtle" disabled>Próximamente</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="category">En Proceso</div>
+        <h3>Próximamente</h3>
+        <p>Continuamos desarrollando nuevas narrativas especulativas.</p>
+        <div class="card-actions">
+          <button class="btn subtle" disabled>Próximamente</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section balanced">
+    <div class="section-text">
+      <div class="meta">Sobre la Ficción</div>
+      <h2>Ciencia Ficción como Herramienta Teológica</h2>
+      <p>
+        La ciencia ficción nos permite explorar preguntas fundamentales sobre nuestra existencia,
+        el propósito de la humanidad y nuestro destino final desde una perspectiva cristiana ortodoxa.
+      </p>
+    </div>
+
+    <div class="section-highlights">
+      <div class="highlight-card">
+        <h3>Narrativas Proféticas</h3>
+        <p>Historias que reflejan las profecías bíblicas en contextos futuristas y tecnológicos.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3>Especulación Teológica</h3>
+        <p>Explorando cómo la fe cristiana se manifiesta en mundos alternativos y futuros posibles.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3>Humanidad y Tecnología</h3>
+        <p>Examinando el impacto de la tecnología en nuestra naturaleza espiritual y destino eterno.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 PhantomTheory.ai Todos los derechos reservados.</p>
+    <p>Jesús es Rey. ☦️</p>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('open');
+    }
+
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navMenu').classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+
+</html>

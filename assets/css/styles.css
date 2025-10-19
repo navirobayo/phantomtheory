@@ -84,6 +84,13 @@ a {
   font-weight: 600;
   letter-spacing: 0.04em;
   color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover,
+.logo:focus {
+  opacity: 0.8;
 }
 
 .nav-toggle {
