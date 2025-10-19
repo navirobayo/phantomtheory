@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom Theory  Science Fiction & Writings</title>
+  <meta name="description" content="Explore science fiction writings and philosophical works at the intersection of technology and consciousness.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+      <div class="logo">Phantom Theory</div>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="#writings">Writings</a>
+        <a href="#books">Books</a>
+        <a href="#about">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="meta">Science Fiction & Philosophy</div>
+      <h1>Exploring the boundaries between consciousness, technology, and reality</h1>
+      <p class="lead">
+        A collection of writings and science fiction works examining the intersection
+        of human consciousness, technological singularity, and the nature of existence.
+      </p>
+      <div class="cta-group">
+        <a href="#books" class="btn primary">Explore Books</a>
+        <a href="#writings" class="btn ghost">Read Writings</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="books" class="content-section">
+    <div class="section-header">
+      <div class="meta">Gallery</div>
+      <h2>Science Fiction & Philosophical Works</h2>
+      <p>Download and explore these works at the intersection of speculative fiction and philosophical inquiry.</p>
+    </div>
+
+    <div class="card-grid trio">
+      <div class="card">
+        <div class="category">Science Fiction</div>
+        <h3>Evangelio 7x</h3>
+        <p>A visionary exploration of transcendence and transformation in the age of technological convergence.</p>
+        <div class="card-actions">
+          <a href="downloads/evangelio-7x.pdf" class="btn primary" download>
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            Download PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="category">Theology</div>
+        <h3>Índice: Teología de la Singularidad</h3>
+        <p>An index exploring theological implications of the technological singularity and the evolution of consciousness.</p>
+        <div class="card-actions">
+          <a href="downloads/indice-teologia-singularidad.pdf" class="btn primary" download>
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            Download PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="category">Manifesto</div>
+        <h3>Manifiesto PH</h3>
+        <p>A philosophical manifesto articulating the core principles and vision of Phantom Theory.</p>
+        <div class="card-actions">
+          <a href="downloads/manifiesto-ph.pdf" class="btn primary" download>
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            Download PDF
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="writings" class="content-section balanced">
+    <div class="section-text">
+      <div class="meta">Philosophy</div>
+      <h2>Writings on Consciousness & Reality</h2>
+      <p>
+        These works explore fundamental questions about the nature of consciousness,
+        the implications of technological advancement, and the evolving relationship
+        between humanity and the systems we create.
+      </p>
+    </div>
+
+    <div class="section-highlights">
+      <div class="highlight-card">
+        <h3>Technology & Transcendence</h3>
+        <p>Examining pathways to human transformation through technological evolution and collective consciousness.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3>Theological Singularity</h3>
+        <p>Bridging spiritual traditions with futures shaped by artificial intelligence and emergent complexity.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3>Speculative Philosophy</h3>
+        <p>Using science fiction as a medium for exploring philosophical concepts and potential futures.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="content-section">
+    <div class="contact-card">
+      <h2>About Phantom Theory</h2>
+      <p class="lead">
+        Phantom Theory is a project dedicated to exploring speculative fiction,
+        philosophical inquiry, and the convergence of consciousness and technology.
+      </p>
+      <p class="contact-meta">
+        All works are freely available for download and exploration.
+      </p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Phantom Theory. All rights reserved.</p>
+    <p>Exploring the boundaries of consciousness and reality.</p>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('open');
+    }
+
+    // Close nav when clicking on a link
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navMenu').classList.remove('open');
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
