@@ -465,6 +465,41 @@ a {
   padding-bottom: 4px;
 }
 
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--color-muted);
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover,
+.social-icon:focus {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
 .site-footer {
   text-align: center;
   padding: 40px 24px 60px;
