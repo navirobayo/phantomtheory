@@ -512,6 +512,7 @@ a {
   padding-bottom: 56.25%; /* 16:9 aspect ratio */
   height: 0;
   overflow: hidden;
+  width: 100%;
   max-width: 900px;
   margin: 0 auto;
   border-radius: var(--radius-lg);
