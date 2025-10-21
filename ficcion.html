@@ -43,6 +43,31 @@
       </div>
     </div>
   </section>
+  <!-- ========================================
+       VISUAL JOURNEY GALLERY
+       ======================================== -->
+  <section class="content-section gallery-section">
+    <div class="section-header">
+      <div class="meta">Visualización</div>
+      <h2>Viaje Visual por BOX-N75</h2>
+      <p>Explora el universo de la historia a través de imágenes generadas por IA</p>
+    </div>
+
+    <!-- Filter Navigation -->
+    <div class="gallery-filters">
+      <button class="filter-btn active" data-filter="all">Todas</button>
+      <button class="filter-btn" data-filter="characters">Personajes</button>
+      <button class="filter-btn" data-filter="locations">Locaciones</button>
+      <button class="filter-btn" data-filter="moments">Momentos Clave</button>
+      <button class="filter-btn" data-filter="cosmic">Cósmico</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="visual-gallery" id="visualGallery">
+      <!-- Gallery items will be populated by JavaScript -->
+    </div>
+  </section>
+
   <section class="content-section">
     <div class="section-header">
       <div class="meta">Audiobook</div>
@@ -886,6 +911,21 @@ FIN.
     <p>&copy; 2025 PhantomTheory.ai Todos los derechos reservados.</p>
     <p>Jesús es Rey. ☦️</p>
   </footer>
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">&times;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)" aria-label="Anterior">‹</button>
+    <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)" aria-label="Siguiente">›</button>
+    <div class="lightbox-content">
+      <img id="lightboxImage" src="" alt="">
+      <div class="lightbox-info">
+        <h3 id="lightboxTitle"></h3>
+        <p id="lightboxDescription"></p>
+        <div class="lightbox-tags" id="lightboxTags"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ========================================
     // Navigation
@@ -900,8 +940,6 @@ FIN.
         document.getElementById('navMenu').classList.remove('open');
       });
     });
-
-    // Scroll-based animations disabled for text visibility
 
     // ========================================
     // Enhanced header on scroll
@@ -918,6 +956,260 @@ FIN.
         header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
         header.style.borderBottomColor = 'rgba(111, 146, 255, 0.15)';
       }
+    });
+
+    // ========================================
+    // VISUAL GALLERY SYSTEM
+    // ========================================
+
+    // Gallery data - each image with metadata for filtering and storytelling
+    const galleryData = [
+      {
+        src: 'assets/images/20250920_1628_Corrupted%20Eden%20Vision_remix_01k5mgak5hf0y9nqz8g0b557m7.png',
+        title: 'Visión del Edén Corrompido',
+        description: 'Después de la Victoria de Gea, la Tierra quedó transformada. Esta imagen captura el momento en que la humanidad contempla lo que queda de su hogar.',
+        chapter: 'Prólogo',
+        tags: ['locations', 'moments', 'cosmic']
+      },
+      {
+        src: 'assets/images/20250916_2300_Neon%20Apocalypse_simple_compose_01k5ax6h4fejqttx4cvgrrdyg3.png',
+        title: 'Apocalipsis Neón',
+        description: 'Las ciudades posthumanas brillan con una luz artificial. La victoria trajo progreso, pero a un costo incalculable.',
+        chapter: 'Capítulo 1',
+        tags: ['locations', 'cosmic']
+      },
+      {
+        src: 'assets/images/20250920_0034_Celestial%20Battle%20Over%20Earth_remix_01k5jsqdxne65sx90b3b8hd39v.png',
+        title: 'Batalla Celestial sobre la Tierra',
+        description: 'El día de la Victoria: naves espaciales abandonan un planeta moribundo mientras las explosiones nucleares iluminan el cielo.',
+        chapter: 'Capítulo 11',
+        tags: ['moments', 'cosmic']
+      },
+      {
+        src: 'assets/images/20250916_2252_Cyberpunk%20Veteran%20Portrait_simple_compose_01k5awrdeaeh1bk3f20nt4nf51.png',
+        title: 'Box: El Veterano',
+        description: 'Box, un sobreviviente de múltiples misiones imposibles. Sus ojos han visto los límites del espacio conocido.',
+        chapter: 'Capítulo 3',
+        tags: ['characters']
+      },
+      {
+        src: 'assets/images/20250916_2250_Cyberpunk%20Awakening_simple_compose_01k5awkxmaegd8v1429ygh7rph.png',
+        title: 'El Despertar',
+        description: 'Santana despierta en su estación. Otro día buscando los secretos que la Victoria intentó enterrar.',
+        chapter: 'Capítulo 1',
+        tags: ['characters', 'moments']
+      },
+      {
+        src: 'assets/images/20250916_2256_Neon%20Spectral%20Confrontation_remix_01k5awz2dwebrvsx58m95bv1pa.png',
+        title: 'Encuentro Espectral',
+        description: 'En las profundidades del espacio, las fronteras entre lo real y lo artificial se difuminan.',
+        chapter: 'Capítulo 17',
+        tags: ['moments', 'cosmic']
+      },
+      {
+        src: 'assets/images/20250916_2257_Cavernous%20Cyber%20Spiritual%20Encounter_simple_compose_01k5ax0mwefh4b7ry77v5r22cf.png',
+        title: 'El Monje Reptiliano',
+        description: 'En las cuevas de Júpiter, Box encuentra al monje. Un ser que desafía toda comprensión humana.',
+        chapter: 'Capítulo 13',
+        tags: ['characters', 'locations', 'moments']
+      },
+      {
+        src: 'assets/images/20250916_2258_Cyberpunk%20AI%20Co-Pilot_simple_compose_01k5ax3aerempv1vsxbfgt8641.png',
+        title: 'Prometea: Asistente de Vuelo',
+        description: 'Prometea, una biomáquina de la resistencia. Su lealtad a TK es inquebrantable.',
+        chapter: 'Capítulo 16',
+        tags: ['characters']
+      },
+      {
+        src: 'assets/images/20250916_2259_Cyberpunk%20Machine%20Priest_simple_compose_01k5ax4rmcem8bp9e10q52m98d.png',
+        title: 'Sacerdote de las Máquinas',
+        description: 'En la era posthumana, nuevas formas de espiritualidad emergen entre circuitos y algoritmos.',
+        chapter: 'Capítulo 5',
+        tags: ['characters', 'cosmic']
+      },
+      {
+        src: 'assets/images/20250916_2301_Apocalyptic%20Cockpit%20Reflections_simple_compose_01k5ax7qe0ec4stx7ya0501wnw.png',
+        title: 'Reflexiones en la Cabina',
+        description: 'Box y Meteora en su última misión juntos. Momentos antes del descenso fatal.',
+        chapter: 'Capítulo 11',
+        tags: ['characters', 'moments']
+      },
+      {
+        src: 'assets/images/20250916_2303_Neon%20Fractal%20Titan_simple_compose_01k5axdmtfe84r3wm4xhg4dqtd.png',
+        title: 'Titán Fractal',
+        description: 'La arquitectura del Arquitecto desafía las leyes de la física conocida.',
+        chapter: 'Capítulo 17',
+        tags: ['cosmic', 'locations']
+      },
+      {
+        src: 'assets/images/20250916_2245_Biomechanical%20Spectral%20Commander_simple_compose_01k5awb4deehfsf0cj8gwhwq6z.png',
+        title: 'Comandante Espectral',
+        description: 'Los líderes de la Victoria: mitad humanos, mitad máquinas, completamente despiadados.',
+        chapter: 'Capítulo 2',
+        tags: ['characters']
+      },
+      {
+        src: 'assets/images/20250917_1247_Pulsing%20Crystal%20Cavern_simple_compose_01k5cch7xbfn8rt8g2z5g0bkvc.png',
+        title: 'Caverna de Cristales',
+        description: 'Las cuevas de Europa: hogar del elemento N75, la sustancia que cambió todo.',
+        chapter: 'Capítulo 12',
+        tags: ['locations', 'cosmic']
+      },
+      {
+        src: 'assets/images/20250916_2244_Cyberpunk%20WANTED%20Poster_simple_compose_01k5aw8efqfv6a3ezh47a59a90.png',
+        title: 'Se Busca: Johnny Véctor',
+        description: 'El desertor más famoso de la Victoria. Su historia es leyenda entre los exploradores.',
+        chapter: 'Capítulo 10',
+        tags: ['characters', 'moments']
+      },
+      {
+        src: 'assets/images/20250916_2308_Smuggler%27s%20Glowing%20Treasure_simple_compose_01k5axn3tmfdj93gh2er0csfaw.png',
+        title: 'Tesoro del Contrabandista',
+        description: 'El N75 en su forma pura: una esponja rojiza que puede cambiar la consciencia misma.',
+        chapter: 'Capítulo 12',
+        tags: ['moments', 'cosmic']
+      },
+      {
+        src: 'assets/images/20250919_2358_Celestial%20Cyberpunk%20Architect_simple_compose_01k5jqq786fmx8bvzccxwwj3yw.png',
+        title: 'El Arquitecto',
+        description: 'El creador y destructor. Una entidad más allá de la comprensión humana.',
+        chapter: 'Capítulo 17',
+        tags: ['characters', 'cosmic']
+      },
+      {
+        src: 'assets/images/20250917_1250_Cybernetic%20Ritual_simple_compose_01k5ccnr3ret2sm82y6yph6qqt.png',
+        title: 'Ritual Cibernético',
+        description: 'La preparación para entrar en el espacio cero requiere disciplina absoluta.',
+        chapter: 'Capítulo 15',
+        tags: ['moments', 'cosmic']
+      },
+      {
+        src: 'assets/images/20250916_2243_Colossal%20Cyberpunk%20Mothership_simple_compose_01k5aw6wa7fejbkdqftg20ckzy.png',
+        title: 'Nave Nodriza MÁTER',
+        description: 'El hogar de la humanidad posthumana: una ciudad flotante en el vacío del espacio.',
+        chapter: 'Capítulo 6',
+        tags: ['locations', 'cosmic']
+      },
+      {
+        src: 'assets/images/20250920_0026_Celestial%20Surveillance%20Encounter_simple_compose_01k5jsa9tqekpb3ew9ckse1jsv.png',
+        title: 'Vigilancia Celestial',
+        description: 'Ojos que observan desde más allá de las estrellas. Nadie está solo en el universo.',
+        chapter: 'Capítulo 17',
+        tags: ['cosmic', 'moments']
+      },
+      {
+        src: 'assets/images/20250917_1245_Biomechanical%20Cybernetic%20Portrait_simple_compose_01k5ccc3mwerh9e56qq3dqbgbq.png',
+        title: 'Meteora',
+        description: 'Comandante, ingeniera, amante. Una de las pocas biomecánicas nacidas en la Tierra.',
+        chapter: 'Capítulo 11',
+        tags: ['characters']
+      }
+    ];
+
+    // Current lightbox index
+    let currentLightboxIndex = 0;
+    let filteredGallery = [...galleryData];
+
+    // Initialize gallery on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderGallery(galleryData);
+      setupFilters();
+    });
+
+    // Render gallery items
+    function renderGallery(items) {
+      const gallery = document.getElementById('visualGallery');
+      if (!gallery) return;
+
+      filteredGallery = items;
+
+      gallery.innerHTML = items.map((item, index) => `
+        <div class="gallery-item" data-tags="${item.tags.join(' ')}" onclick="openLightbox(${index})">
+          <div class="gallery-item__image" style="background-image: url('${item.src}')"></div>
+          <div class="gallery-item__overlay">
+            <h3>${item.title}</h3>
+            <p class="gallery-item__chapter">${item.chapter}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Animate items in
+      setTimeout(() => {
+        document.querySelectorAll('.gallery-item').forEach((item, i) => {
+          setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          }, i * 50);
+        });
+      }, 100);
+    }
+
+    // Setup filter buttons
+    function setupFilters() {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active state
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          // Filter gallery
+          const filter = btn.dataset.filter;
+          if (filter === 'all') {
+            renderGallery(galleryData);
+          } else {
+            const filtered = galleryData.filter(item => item.tags.includes(filter));
+            renderGallery(filtered);
+          }
+        });
+      });
+    }
+
+    // Open lightbox
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close lightbox
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Navigate lightbox
+    function navigateLightbox(direction) {
+      currentLightboxIndex = (currentLightboxIndex + direction + filteredGallery.length) % filteredGallery.length;
+      updateLightbox();
+    }
+
+    // Update lightbox content
+    function updateLightbox() {
+      const item = filteredGallery[currentLightboxIndex];
+      document.getElementById('lightboxImage').src = item.src;
+      document.getElementById('lightboxImage').alt = item.title;
+      document.getElementById('lightboxTitle').textContent = item.title;
+      document.getElementById('lightboxDescription').textContent = item.description;
+      document.getElementById('lightboxTags').innerHTML = `
+        <span class="lightbox-tag">${item.chapter}</span>
+        ${item.tags.map(tag => `<span class="lightbox-tag">${tag}</span>`).join('')}
+      `;
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (!lightbox.classList.contains('active')) return;
+
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+
+    // Close lightbox on background click
+    document.getElementById('lightbox')?.addEventListener('click', (e) => {
+      if (e.target.id === 'lightbox') closeLightbox();
     });
   </script>
 </body>
