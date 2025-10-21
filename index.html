@@ -33,23 +33,54 @@
     </nav>
   </header>
 
-  <section class="hero hero--with-media">
-    <div class="hero-content">
-      <div class="meta">Teología Cristiana + Ciencia Ficción Latinoamericana</div>
-      <h1>Lucifer parece estar suelto por una temporada, lo que explica el mundo en el que vivimos.</h1>
-      <p class="lead">
-        Un proyecto creado por Ivan Robayo, escritor y programador independiente Colombiano. El sitio web está dividido
-        en dos categorias principales: Ficción y Estudios Escatológicos.
-      </p>
-      <div class="cta-group">
-        <a href="ficcion.html" class="btn primary">Ficción</a>
-        <a href="escatologia.html" class="btn ghost">Escatología</a>
+  <section class="hero-immersive">
+    <!-- Background Image Layers -->
+    <div class="hero-background">
+      <div class="hero-background__layer hero-background__layer--1 active"></div>
+      <div class="hero-background__layer hero-background__layer--2"></div>
+      <div class="hero-background__layer hero-background__layer--3"></div>
+      <div class="hero-background__overlay"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="hero-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <!-- Content Card with Glassmorphism -->
+    <div class="hero-content-wrapper">
+      <div class="hero-glass-card">
+        <div class="meta">Teología Cristiana + Ciencia Ficción Latinoamericana</div>
+        <h1>Lucifer parece estar suelto por una temporada, lo que explica el mundo en el que vivimos.</h1>
+        <p class="lead">
+          Un proyecto creado por Ivan Robayo, escritor y programador independiente Colombiano. El sitio web está dividido
+          en dos categorias principales: Ficción y Estudios Escatológicos.
+        </p>
+        <div class="cta-group">
+          <a href="ficcion.html" class="btn primary">Ficción</a>
+          <a href="escatologia.html" class="btn ghost">Escatología</a>
+        </div>
+      </div>
+
+      <!-- Image Preview Cards -->
+      <div class="hero-image-previews">
+        <div class="preview-card preview-card--1" data-image="1"></div>
+        <div class="preview-card preview-card--2" data-image="2"></div>
+        <div class="preview-card preview-card--3" data-image="3"></div>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hero-visual__overlay"></div>
-      <img src="assets/images/20250920_1628_Corrupted Eden Vision_remix_01k5mgak5hf0y9nqz8g0b557m7.png"
-        alt="Ilustración ciberpunk de un ángel guardián en una ciudad distópica iluminada por neón.">
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-indicator__text">Explora</div>
+      <div class="scroll-indicator__line"></div>
     </div>
   </section>
 
@@ -172,6 +203,9 @@
   </footer>
 
   <script>
+    // ========================================
+    // Navigation
+    // ========================================
     function toggleNav() {
       const navMenu = document.getElementById('navMenu');
       navMenu.classList.toggle('open');
@@ -197,6 +231,136 @@
         }
       });
     });
+
+    // ========================================
+    // Hero Immersive Experience
+    // ========================================
+
+    // Background Image Slideshow
+    let currentImageIndex = 0;
+    const backgroundLayers = document.querySelectorAll('.hero-background__layer');
+    const totalImages = backgroundLayers.length;
+
+    function cycleBackgroundImages() {
+      // Remove active class from current image
+      backgroundLayers[currentImageIndex].classList.remove('active');
+
+      // Move to next image
+      currentImageIndex = (currentImageIndex + 1) % totalImages;
+
+      // Add active class to new image
+      backgroundLayers[currentImageIndex].classList.add('active');
+    }
+
+    // Auto-cycle every 8 seconds
+    setInterval(cycleBackgroundImages, 8000);
+
+    // Preview Card Click Handlers
+    document.querySelectorAll('.preview-card').forEach((card, index) => {
+      card.addEventListener('click', () => {
+        // Remove active from all layers
+        backgroundLayers.forEach(layer => layer.classList.remove('active'));
+
+        // Add active to selected layer
+        backgroundLayers[index].classList.add('active');
+
+        // Update current index
+        currentImageIndex = index;
+
+        // Add visual feedback
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          card.style.transform = '';
+        }, 200);
+      });
+    });
+
+    // Parallax Effect on Scroll
+    const heroSection = document.querySelector('.hero-immersive');
+    const glassCard = document.querySelector('.hero-glass-card');
+
+    if (heroSection && glassCard) {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const heroHeight = heroSection.offsetHeight;
+
+        // Only apply parallax while hero is in view
+        if (scrolled < heroHeight) {
+          // Parallax background layers at different speeds
+          backgroundLayers.forEach((layer, index) => {
+            const speed = 0.3 + (index * 0.15);
+            layer.style.transform = `translateY(${scrolled * speed}px)`;
+          });
+
+          // Subtle fade out effect on glass card
+          const opacity = 1 - (scrolled / heroHeight) * 1.5;
+          if (opacity > 0) {
+            glassCard.style.opacity = opacity;
+          }
+        }
+      });
+    }
+
+    // Mouse Movement Parallax (Desktop only)
+    if (window.innerWidth > 768) {
+      heroSection?.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+
+        // Calculate mouse position as percentage
+        const xPos = (clientX / innerWidth - 0.5) * 2;
+        const yPos = (clientY / innerHeight - 0.5) * 2;
+
+        // Apply subtle movement to glass card
+        glassCard.style.transform = `
+          translateX(${xPos * 10}px)
+          translateY(${yPos * 10}px)
+        `;
+
+        // Move particles in opposite direction
+        document.querySelectorAll('.particle').forEach((particle, index) => {
+          const speed = 1 + (index * 0.5);
+          particle.style.transform = `
+            translate(${-xPos * speed * 5}px, ${-yPos * speed * 5}px)
+          `;
+        });
+      });
+
+      // Reset on mouse leave
+      heroSection?.addEventListener('mouseleave', () => {
+        glassCard.style.transform = '';
+        document.querySelectorAll('.particle').forEach(particle => {
+          particle.style.transform = '';
+        });
+      });
+    }
+
+    // Intersection Observer for Scroll Indicator
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+              scrollIndicator.style.opacity = '0';
+            } else {
+              scrollIndicator.style.opacity = '1';
+            }
+          });
+        },
+        { threshold: 0.8 }
+      );
+
+      observer.observe(heroSection);
+    }
+
+    // Performance optimization: Reduce animations on low-end devices
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.particle').forEach(particle => {
+        particle.style.animation = 'none';
+      });
+    }
   </script>
 
 </body>

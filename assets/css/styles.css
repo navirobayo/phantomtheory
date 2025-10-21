@@ -135,84 +135,374 @@ a {
   color: #fff;
 }
 
-.hero {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 120px 24px 80px;
-  display: grid;
-  gap: 40px;
-}
+/* ========================================
+   IMMERSIVE HERO SECTION WITH GLASSMORPHISM
+   ======================================== */
 
-.hero-content {
-  max-width: 640px;
-}
-
-.hero--with-media {
-  align-items: center;
-}
-
-.hero-visual {
+.hero-immersive {
   position: relative;
-  border-radius: var(--radius-lg);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(38, 54, 132, 0.4), rgba(144, 40, 150, 0.35));
-  border: 1px solid rgba(111, 146, 255, 0.18);
-  box-shadow: var(--shadow-xl);
-  min-height: 320px;
   isolation: isolate;
 }
 
-.hero-visual__overlay {
+/* Background Image Layers */
+.hero-background {
   position: absolute;
-  inset: -30%;
-  background: radial-gradient(circle at 20% 20%, rgba(46, 126, 255, 0.55), transparent 55%),
-    radial-gradient(circle at 80% 30%, rgba(168, 63, 255, 0.45), transparent 65%),
-    radial-gradient(circle at 50% 90%, rgba(14, 242, 255, 0.25), transparent 65%);
-  filter: blur(18px);
-  opacity: 0.7;
+  inset: 0;
   z-index: 0;
 }
 
-.hero-visual img {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.02);
-  z-index: 1;
-  mix-blend-mode: screen;
-  filter: saturate(1.1) contrast(1.05);
+.hero-background__layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+  will-change: opacity;
 }
 
-.hero h1 {
+.hero-background__layer.active {
+  opacity: 1;
+}
+
+.hero-background__layer--1 {
+  background-image: url('../images/20250920_1628_Corrupted Eden Vision_remix_01k5mgak5hf0y9nqz8g0b557m7.png');
+}
+
+.hero-background__layer--2 {
+  background-image: url('../images/20250916_2300_Neon Apocalypse_simple_compose_01k5ax6h4fejqttx4cvgrrdyg3.png');
+}
+
+.hero-background__layer--3 {
+  background-image: url('../images/20250920_0034_Celestial Battle Over Earth_remix_01k5jsqdxne65sx90b3b8hd39v.png');
+}
+
+.hero-background__overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(4, 4, 15, 0.3) 0%, rgba(4, 4, 15, 0.75) 100%);
+  z-index: 1;
+}
+
+/* Floating Particles */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(111, 146, 255, 0.6);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(111, 146, 255, 0.8);
+  animation: float-particle 20s infinite ease-in-out;
+}
+
+.particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 18s; }
+.particle:nth-child(2) { left: 20%; top: 60%; animation-delay: 2s; animation-duration: 22s; }
+.particle:nth-child(3) { left: 30%; top: 40%; animation-delay: 4s; animation-duration: 20s; }
+.particle:nth-child(4) { left: 60%; top: 30%; animation-delay: 1s; animation-duration: 24s; }
+.particle:nth-child(5) { left: 70%; top: 70%; animation-delay: 3s; animation-duration: 19s; }
+.particle:nth-child(6) { left: 80%; top: 50%; animation-delay: 5s; animation-duration: 21s; }
+.particle:nth-child(7) { left: 50%; top: 80%; animation-delay: 2.5s; animation-duration: 23s; }
+.particle:nth-child(8) { left: 40%; top: 10%; animation-delay: 4.5s; animation-duration: 17s; }
+
+@keyframes float-particle {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(20px, -30px) scale(1.2);
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.4;
+  }
+}
+
+/* Content Wrapper */
+.hero-content-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px 20px 60px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+/* Glassmorphism Content Card */
+.hero-glass-card {
+  background: rgba(14, 18, 42, 0.25);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 32px;
+  padding: 48px 40px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  animation: fade-in-up 1s ease-out;
+}
+
+.hero-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(111, 146, 255, 0.5) 50%,
+    transparent
+  );
+  opacity: 0.6;
+}
+
+.hero-glass-card h1 {
   font-family: "Playfair Display", "Times New Roman", serif;
-  font-size: clamp(2.2rem, 4vw, 3.3rem);
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
   line-height: 1.15;
   margin: 18px 0;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
-.meta {
+.hero-glass-card .meta {
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--color-meta);
+  font-weight: 600;
 }
 
-.lead {
+.hero-glass-card .lead {
   font-size: 1.1rem;
-  color: var(--color-muted);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
 }
 
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image Preview Cards */
+.hero-image-previews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  animation: fade-in-up 1s ease-out 0.3s both;
+}
+
+.preview-card {
+  aspect-ratio: 1;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(0px);
+}
+
+.preview-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(111, 146, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.preview-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  border-color: rgba(111, 146, 255, 0.6);
+  box-shadow: 0 16px 40px rgba(111, 146, 255, 0.3);
+}
+
+.preview-card:hover::before {
+  opacity: 1;
+}
+
+.preview-card--1 {
+  background-image: url('../images/20250920_1628_Corrupted Eden Vision_remix_01k5mgak5hf0y9nqz8g0b557m7.png');
+}
+
+.preview-card--2 {
+  background-image: url('../images/20250916_2300_Neon Apocalypse_simple_compose_01k5ax6h4fejqttx4cvgrrdyg3.png');
+}
+
+.preview-card--3 {
+  background-image: url('../images/20250920_0034_Celestial Battle Over Earth_remix_01k5jsqdxne65sx90b3b8hd39v.png');
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: fade-in 1s ease-out 1s both;
+}
+
+.scroll-indicator__text {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+}
+
+.scroll-indicator__line {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(111, 146, 255, 0.8), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Mobile First Responsive Design */
 @media (min-width: 768px) {
-  .hero--with-media {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    gap: 56px;
+  .hero-content-wrapper {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 48px;
+    padding: 120px 48px 80px;
+  }
+
+  .hero-glass-card {
+    padding: 64px 56px;
+  }
+
+  .hero-image-previews {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .preview-card {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-content-wrapper {
+    padding: 140px 64px 100px;
   }
 }
 
 @media (max-width: 767px) {
-  .hero-visual {
-    min-height: 260px;
+  .hero-immersive {
+    min-height: auto;
+    padding: 80px 0 60px;
+  }
+
+  .hero-glass-card {
+    padding: 36px 28px;
+    border-radius: 24px;
+  }
+
+  .hero-glass-card h1 {
+    font-size: 1.9rem;
+  }
+
+  .hero-glass-card .meta {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+  }
+
+  .hero-glass-card .lead {
+    font-size: 1rem;
+  }
+
+  .hero-image-previews {
+    gap: 12px;
+  }
+
+  .preview-card {
+    border-radius: 16px;
+  }
+
+  .scroll-indicator {
+    bottom: 20px;
+  }
+
+  .particle {
+    width: 3px;
+    height: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content-wrapper {
+    padding: 80px 16px 50px;
+  }
+
+  .hero-glass-card {
+    padding: 28px 24px;
+    border-radius: 20px;
+  }
+
+  .hero-glass-card h1 {
+    font-size: 1.7rem;
+  }
+
+  .hero-image-previews {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .preview-card {
+    aspect-ratio: 16 / 10;
   }
 }
 
