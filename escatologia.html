@@ -46,38 +46,68 @@
     </div>
   </section>
 
+  <!-- ========================================
+       RESEARCH ARCHIVE NAVIGATION
+       ======================================== -->
   <section class="content-section">
     <div class="section-header">
-      <div class="meta">Temas Escatológicos</div>
-      <h2>Áreas de Estudio</h2>
+      <div class="meta">Archivo de Investigación</div>
+      <h2>Estudios Bíblicos y Análisis Escatológico</h2>
+      <p>Una exploración sistemática de las profecías del fin de los tiempos, tecnología moderna y la segunda venida de Cristo.</p>
     </div>
 
-    <div class="card-grid">
-      <div class="card">
-        <h3>El Anticristo y la Tecnología</h3>
-        <p>Explorando cómo las profecías sobre el Anticristo se relacionan con los desarrollos tecnológicos modernos,
-          incluyendo la inteligencia artificial y los sistemas de control global.</p>
-      </div>
-
-      <div class="card">
-        <h3>La Marca de la Bestia</h3>
-        <p>Análisis de Apocalipsis 13:16-18 en el contexto de las tecnologías de identificación digital, biometría y
-          sistemas de pago electrónico.</p>
-      </div>
-
-      <div class="card">
-        <h3>La Segunda Venida</h3>
-        <p>Estudio de las señales bíblicas del regreso de Cristo y su manifestación en los eventos mundiales
-          contemporáneos.</p>
-      </div>
-
-      <div class="card">
-        <h3>Juicio Final</h3>
-        <p>Reflexiones sobre el destino eterno de la humanidad, la resurrección de los muertos y el establecimiento del
-          Reino de Dios.</p>
-      </div>
+    <!-- Topic Filters -->
+    <div class="study-filters">
+      <button class="study-filter-btn active" data-filter="all">Todas las Entradas</button>
+      <button class="study-filter-btn" data-filter="anticristo">Anticristo</button>
+      <button class="study-filter-btn" data-filter="marca">Marca de la Bestia</button>
+      <button class="study-filter-btn" data-filter="tecnologia">Tecnología</button>
+      <button class="study-filter-btn" data-filter="profecia">Profecía</button>
+      <button class="study-filter-btn" data-filter="segunda-venida">Segunda Venida</button>
     </div>
   </section>
+
+  <!-- ========================================
+       STUDY ENTRIES SECTION
+       ======================================== -->
+  <section class="content-section studies-section">
+    <div class="studies-grid" id="studiesGrid">
+      <!-- Study entries will be populated by JavaScript -->
+    </div>
+  </section>
+
+  <!-- ========================================
+       STUDY ENTRY DETAIL MODAL
+       ======================================== -->
+  <div class="study-modal" id="studyModal">
+    <div class="study-modal__overlay" onclick="closeStudyModal()"></div>
+    <div class="study-modal__container">
+      <button class="study-modal__close" onclick="closeStudyModal()" aria-label="Cerrar">&times;</button>
+
+      <article class="study-detail">
+        <header class="study-detail__header">
+          <div class="study-detail__meta">
+            <span class="study-detail__date" id="modalDate"></span>
+            <span class="study-detail__reading-time" id="modalReadingTime"></span>
+          </div>
+          <h1 class="study-detail__title" id="modalTitle"></h1>
+          <div class="study-detail__scripture" id="modalScripture"></div>
+          <div class="study-detail__tags" id="modalTags"></div>
+        </header>
+
+        <div class="study-detail__image" id="modalImage"></div>
+
+        <div class="study-detail__content" id="modalContent"></div>
+
+        <footer class="study-detail__footer">
+          <div class="study-detail__references">
+            <h3>Referencias Bíblicas</h3>
+            <div id="modalReferences"></div>
+          </div>
+        </footer>
+      </article>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <p>&copy; 2025 PhantomTheory.ai Todos los derechos reservados.</p>
@@ -100,31 +130,6 @@
     });
 
     // ========================================
-    // Scroll-based animations
-    // ========================================
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // Observe all content sections
-    document.querySelectorAll('.content-section').forEach(section => {
-      section.style.opacity = '0';
-      section.style.transform = 'translateY(30px)';
-      section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-      sectionObserver.observe(section);
-    });
-
-    // ========================================
     // Enhanced header on scroll
     // ========================================
     const header = document.querySelector('.site-header');
@@ -138,6 +143,468 @@
       } else {
         header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
         header.style.borderBottomColor = 'rgba(111, 146, 255, 0.15)';
+      }
+    });
+
+    // ========================================
+    // ESCHATOLOGICAL STUDIES SYSTEM
+    // ========================================
+
+    // Study entries database - Add your research here
+    const studyEntries = [
+      {
+        id: 1,
+        title: 'La Inteligencia Artificial y el Sistema del Anticristo',
+        date: '2025-01-15',
+        scripture: 'Apocalipsis 13:15-17',
+        excerpt: 'Un análisis de cómo las tecnologías de IA podrían facilitar el sistema de control global profetizado en Apocalipsis.',
+        content: `
+          <p>En Apocalipsis 13:15-17, Juan describe un sistema donde "se le permitió infundir aliento a la imagen de la bestia, para que la imagen hablase e hiciese matar a todo el que no la adorase." En el contexto del siglo XXI, observamos el desarrollo acelerado de tecnologías que podrían facilitar tal sistema.</p>
+
+          <h3>La Imagen que Habla</h3>
+          <p>Las tecnologías de inteligencia artificial han avanzado hasta el punto donde sistemas pueden:</p>
+          <ul>
+            <li>Procesar lenguaje natural y mantener conversaciones coherentes</li>
+            <li>Tomar decisiones autónomas basadas en algoritmos complejos</li>
+            <li>Monitorear y analizar comportamientos a escala global</li>
+            <li>Generar imágenes y contenido altamente realista</li>
+          </ul>
+
+          <h3>El Sistema de Control Global</h3>
+          <p>El versículo 16-17 menciona que "a todos, pequeños y grandes, ricos y pobres, libres y esclavos, se les pusiese una marca en la mano derecha, o en la frente; y que ninguno pudiese comprar ni vender, sino el que tuviese la marca."</p>
+
+          <p>Hoy observamos el desarrollo de:</p>
+          <ul>
+            <li>Sistemas de identificación biométrica global</li>
+            <li>Monedas digitales controladas por bancos centrales (CBDC)</li>
+            <li>Sistemas de crédito social que determinan acceso a servicios</li>
+            <li>Tecnologías de implantes subcutáneos para identificación</li>
+          </ul>
+
+          <h3>La Convergencia Tecnológica</h3>
+          <p>Lo que hace único este momento histórico es la convergencia de múltiples tecnologías que, combinadas, podrían crear el sistema descrito en Apocalipsis:</p>
+          <ul>
+            <li><strong>IA:</strong> Para procesar y controlar información masiva</li>
+            <li><strong>Blockchain:</strong> Para registros inmutables y moneda digital</li>
+            <li><strong>IoT:</strong> Para conectar todos los dispositivos y personas</li>
+            <li><strong>Biometría:</strong> Para identificación única e infalible</li>
+          </ul>
+
+          <h3>Reflexión Teológica</h3>
+          <p>No afirmamos que estas tecnologías son inherentemente malvadas. Sin embargo, la Biblia nos advierte sobre sistemas de control que usurpan la soberanía de Dios y esclavizan a la humanidad. Como cristianos, debemos:</p>
+          <ul>
+            <li>Mantener vigilancia espiritual (Mateo 24:42)</li>
+            <li>Discernir los tiempos (1 Crónicas 12:32)</li>
+            <li>Poner nuestra confianza en Dios, no en sistemas humanos (Salmos 20:7)</li>
+          </ul>
+        `,
+        image: 'assets/images/20250916_2259_Cyberpunk%20Machine%20Priest_simple_compose_01k5ax4rmcem8bp9e10q52m98d.png',
+        tags: ['anticristo', 'tecnologia', 'profecia'],
+        references: [
+          'Apocalipsis 13:15-17',
+          'Mateo 24:42',
+          '1 Crónicas 12:32',
+          'Salmos 20:7',
+          'Daniel 7:23-25'
+        ],
+        readingTime: '8 min'
+      },
+      {
+        id: 2,
+        title: 'La Marca de la Bestia en la Era Digital',
+        date: '2025-01-10',
+        scripture: 'Apocalipsis 13:16-18',
+        excerpt: 'Examinando las tecnologías modernas de identificación y pago a la luz de las profecías sobre la marca de la bestia.',
+        content: `
+          <p>Apocalipsis 13:16-18 describe uno de los pasajes más debatidos de la escatología: la marca de la bestia. "Y hacía que a todos, pequeños y grandes, ricos y pobres, libres y esclavos, se les pusiese una marca en la mano derecha, o en la frente."</p>
+
+          <h3>Características de la Marca</h3>
+          <p>Según el texto bíblico, la marca tiene varias características distintivas:</p>
+          <ul>
+            <li><strong>Universal:</strong> Afecta a todos los estratos sociales</li>
+            <li><strong>Ubicación específica:</strong> Mano derecha o frente</li>
+            <li><strong>Control económico:</strong> Necesaria para comprar y vender</li>
+            <li><strong>Identificación numérica:</strong> El número 666</li>
+            <li><strong>Acto de adoración:</strong> Implica lealtad a la bestia</li>
+          </ul>
+
+          <h3>Tecnologías Contemporáneas</h3>
+          <p>En 2024-2025, observamos el desarrollo de varias tecnologías relevantes:</p>
+
+          <h4>1. Microchips Subcutáneos</h4>
+          <p>Empresas como Dangerous Things y Walletmor ya ofrecen implantes RFID y NFC que permiten:</p>
+          <ul>
+            <li>Pagos sin contacto</li>
+            <li>Acceso a edificios y sistemas</li>
+            <li>Almacenamiento de información médica</li>
+            <li>Verificación de identidad</li>
+          </ul>
+
+          <h4>2. Monedas Digitales de Bancos Centrales (CBDC)</h4>
+          <p>Más de 100 países están desarrollando o probando CBDCs, que permitirían:</p>
+          <ul>
+            <li>Control total de transacciones</li>
+            <li>Programación de dinero (dinero que expira o solo puede usarse para ciertos productos)</li>
+            <li>Eliminación del efectivo físico</li>
+            <li>Capacidad de "apagar" el acceso financiero de individuos</li>
+          </ul>
+
+          <h4>3. Identificación Biométrica</h4>
+          <p>Sistemas de reconocimiento facial, de iris y de palma están implementándose globalmente:</p>
+          <ul>
+            <li>Amazon One: Pago con la palma de la mano</li>
+            <li>Sistemas de crédito social en China</li>
+            <li>Identificación digital obligatoria en varios países</li>
+          </ul>
+
+          <h3>El Aspecto Espiritual</h3>
+          <p>Es crucial entender que la marca de la bestia no es solo una tecnología, sino un acto de adoración y lealtad. Apocalipsis 14:9-11 advierte sobre las consecuencias eternas de recibir la marca.</p>
+
+          <p>La marca representa:</p>
+          <ul>
+            <li>Rechazo consciente de Dios</li>
+            <li>Lealtad al sistema del Anticristo</li>
+            <li>Participación en el sistema económico blasfemo</li>
+          </ul>
+
+          <h3>¿Qué Hacer Como Creyentes?</h3>
+          <p>Nuestra respuesta debe ser:</p>
+          <ul>
+            <li><strong>Vigilancia:</strong> Entender los tiempos sin paranoia</li>
+            <li><strong>Discernimiento:</strong> No toda tecnología es "la marca"</li>
+            <li><strong>Fe:</strong> Confianza en la provisión de Dios</li>
+            <li><strong>Preparación espiritual:</strong> Fortalecer nuestra relación con Cristo</li>
+          </ul>
+
+          <blockquote>
+            "Bienaventurados los que lavan sus ropas, para tener derecho al árbol de la vida, y para entrar por las puertas en la ciudad." - Apocalipsis 22:14
+          </blockquote>
+        `,
+        image: 'assets/images/20250920_1623_Cyberpunk%20Reality%20Command_remix_01k5mg1rpae9brecwthqa86tkw.png',
+        tags: ['marca', 'tecnologia', 'profecia'],
+        references: [
+          'Apocalipsis 13:16-18',
+          'Apocalipsis 14:9-11',
+          'Apocalipsis 22:14',
+          'Apocalipsis 20:4'
+        ],
+        readingTime: '12 min'
+      },
+      {
+        id: 3,
+        title: 'Señales de los Tiempos: El Retorno de Israel',
+        date: '2025-01-05',
+        scripture: 'Ezequiel 37:21-22',
+        excerpt: 'El renacimiento del Estado de Israel en 1948 como cumplimiento profético y señal escatológica fundamental.',
+        content: `
+          <p>Una de las señales escatológicas más significativas del siglo XX fue el renacimiento del Estado de Israel en 1948, después de casi 2000 años de dispersión. Este evento fue profetizado múltiples veces en las Escrituras.</p>
+
+          <h3>La Profecía de los Huesos Secos</h3>
+          <p>Ezequiel 37 describe la visión del valle de los huesos secos, una profecía sobre la restauración de Israel:</p>
+
+          <blockquote>
+            "Así ha dicho Jehová el Señor: He aquí, yo tomo a los hijos de Israel de entre las naciones a las cuales fueron, y los recogeré de todas partes, y los traeré a su tierra; y los haré una nación en la tierra, en los montes de Israel." - Ezequiel 37:21-22
+          </blockquote>
+
+          <h3>El Cumplimiento Histórico</h3>
+          <p>El 14 de mayo de 1948, David Ben-Gurion proclamó la independencia del Estado de Israel. Este evento es notable porque:</p>
+          <ul>
+            <li>Ocurrió exactamente como fue profetizado: un renacimiento nacional</li>
+            <li>Sucedió después de casi 2000 años de dispersión</li>
+            <li>El pueblo judío mantuvo su identidad a pesar de la diáspora</li>
+            <li>El hebreo, una lengua muerta, fue revivido como lengua nacional</li>
+          </ul>
+
+          <h3>Otras Profecías Relacionadas</h3>
+
+          <h4>Isaías 66:8</h4>
+          <blockquote>
+            "¿Quién oyó cosa semejante? ¿quién vio tal cosa? ¿Concebirá la tierra en un día? ¿Nacerá una nación de una vez?"
+          </blockquote>
+          <p>Israel literalmente se convirtió en nación en un día - el 14 de mayo de 1948.</p>
+
+          <h4>Jeremías 16:14-15</h4>
+          <p>Profetiza un retorno masivo de judíos desde todas las naciones, lo cual hemos visto en las aliyas (migraciones) del siglo XX y XXI.</p>
+
+          <h3>Implicaciones Escatológicas</h3>
+          <p>El renacimiento de Israel es significativo porque:</p>
+          <ul>
+            <li>Jesús dijo que esta generación que viera estas señales no pasaría (Mateo 24:32-34)</li>
+            <li>La parábola de la higuera (representando a Israel) floreciendo</li>
+            <li>Muchas profecías del fin requieren la existencia de Israel como nación</li>
+            <li>La reconstrucción del Tercer Templo, mencionada en profecías, requiere control judío de Jerusalén</li>
+          </ul>
+
+          <h3>Jerusalén: El Reloj Profético</h3>
+          <p>En 1967, durante la Guerra de los Seis Días, Israel recuperó el control de Jerusalén por primera vez desde el año 70 d.C. Jesús profetizó sobre esto en Lucas 21:24:</p>
+
+          <blockquote>
+            "Y caerán a filo de espada, y serán llevados cautivos a todas las naciones; y Jerusalén será hollada por los gentiles, hasta que los tiempos de los gentiles se cumplan."
+          </blockquote>
+
+          <h3>Perspectiva Equilibrada</h3>
+          <p>Como cristianos, debemos:</p>
+          <ul>
+            <li>Reconocer el cumplimiento profético sin caer en especulación</li>
+            <li>Orar por la paz de Jerusalén (Salmos 122:6)</li>
+            <li>Entender que Israel tiene un papel en el plan profético de Dios</li>
+            <li>Mantener nuestra esperanza en Cristo, no en eventos geopolíticos</li>
+          </ul>
+
+          <p>El renacimiento de Israel no es el fin de la historia, sino una señal de que nos acercamos al cumplimiento final de todas las profecías.</p>
+        `,
+        image: 'assets/images/20250920_0034_Celestial%20Battle%20Over%20Earth_remix_01k5jsqdxne65sx90b3b8hd39v.png',
+        tags: ['profecia', 'segunda-venida'],
+        references: [
+          'Ezequiel 37:21-22',
+          'Isaías 66:8',
+          'Jeremías 16:14-15',
+          'Mateo 24:32-34',
+          'Lucas 21:24',
+          'Salmos 122:6'
+        ],
+        readingTime: '10 min'
+      },
+      {
+        id: 4,
+        title: 'El Período de Tribulación: 7 Años de Juicio',
+        date: '2024-12-28',
+        scripture: 'Daniel 9:24-27',
+        excerpt: 'Análisis de la profecía de las 70 semanas de Daniel y su relación con los últimos 7 años antes del retorno de Cristo.',
+        content: `
+          <p>La profecía de las setenta semanas de Daniel es una de las más precisas y verificables de toda la Escritura. Daniel 9:24-27 establece un marco temporal profético que culmina en los últimos 7 años de la historia humana antes del establecimiento del Reino de Dios.</p>
+
+          <h3>Las 70 Semanas Explicadas</h3>
+          <p>Una "semana" en este contexto profético representa siete años. Por lo tanto:</p>
+          <ul>
+            <li>70 semanas = 490 años</li>
+            <li>69 semanas = 483 años (hasta la primera venida de Cristo)</li>
+            <li>1 semana restante = 7 años (el período de tribulación)</li>
+          </ul>
+
+          <blockquote>
+            "Setenta semanas están determinadas sobre tu pueblo y sobre tu santa ciudad, para terminar la prevaricación, y poner fin al pecado, y expiar la iniquidad, para traer la justicia perdurable, y sellar la visión y la profecía, y ungir al Santo de los santos." - Daniel 9:24
+          </blockquote>
+
+          <h3>El Cumplimiento Histórico de las Primeras 69 Semanas</h3>
+          <p>Sir Robert Anderson, en su libro "The Coming Prince" (1894), calculó que desde el decreto de Artajerjes para reconstruir Jerusalén (Nehemías 2:1-8) en el año 445 a.C. hasta la entrada triunfal de Jesús en Jerusalén fueron exactamente 483 años proféticos (de 360 días).</p>
+
+          <p>Esto demuestra la precisión matemática de la profecía de Daniel.</p>
+
+          <h3>El Paréntesis Profético</h3>
+          <p>Después de las 69 semanas, hay un paréntesis - la era de la Iglesia - antes de que comience la semana 70. Daniel 9:26 dice:</p>
+
+          <blockquote>
+            "Y después de las sesenta y dos semanas se quitará la vida al Mesías, mas no por sí; y el pueblo de un príncipe que ha de venir destruirá la ciudad y el santuario."
+          </blockquote>
+
+          <p>Esto se cumplió en el año 70 d.C. cuando los romanos (el pueblo del "príncipe que ha de venir") destruyeron Jerusalén y el Templo.</p>
+
+          <h3>La Semana 70: Los 7 Años de Tribulación</h3>
+          <p>La última semana aún está por cumplirse. Daniel 9:27 describe este período:</p>
+
+          <blockquote>
+            "Y por otra semana confirmará el pacto con muchos; a la mitad de la semana hará cesar el sacrificio y la ofrenda."
+          </blockquote>
+
+          <h4>Características de Este Período:</h4>
+          <ul>
+            <li><strong>Duración:</strong> 7 años, divididos en dos períodos de 3.5 años</li>
+            <li><strong>El Pacto:</strong> El Anticristo hará un tratado con Israel</li>
+            <li><strong>Ruptura a la Mitad:</strong> A los 3.5 años, romperá el pacto</li>
+            <li><strong>Abominación Desoladora:</strong> Profanará el Templo reconstruido</li>
+            <li><strong>Gran Tribulación:</strong> Los últimos 3.5 años serán de juicio intenso</li>
+          </ul>
+
+          <h3>Conexión con Apocalipsis</h3>
+          <p>El libro de Apocalipsis describe este mismo período usando diferentes medidas:</p>
+          <ul>
+            <li>"Cuarenta y dos meses" (Apocalipsis 11:2, 13:5) = 3.5 años</li>
+            <li>"Mil doscientos sesenta días" (Apocalipsis 11:3, 12:6) = 3.5 años</li>
+            <li>"Un tiempo, y tiempos, y la mitad de un tiempo" (Apocalipsis 12:14) = 3.5 años</li>
+          </ul>
+
+          <h3>Eventos Clave Durante la Tribulación</h3>
+
+          <h4>Primera Mitad (3.5 años):</h4>
+          <ul>
+            <li>El Anticristo emerge y confirma el pacto con Israel</li>
+            <li>Los dos testigos profetizan (Apocalipsis 11)</li>
+            <li>Apertura de los sellos del juicio</li>
+            <li>144,000 judíos son sellados</li>
+          </ul>
+
+          <h4>Segunda Mitad (3.5 años - Gran Tribulación):</h4>
+          <ul>
+            <li>Abominación desoladora en el Templo</li>
+            <li>El Anticristo exige adoración como dios</li>
+            <li>Implementación de la marca de la bestia</li>
+            <li>Las copas de la ira de Dios</li>
+            <li>La batalla de Armagedón</li>
+          </ul>
+
+          <h3>El Propósito de la Tribulación</h3>
+          <p>Según Daniel 9:24, este período tiene múltiples propósitos:</p>
+          <ul>
+            <li>Terminar con la prevaricación de Israel</li>
+            <li>Poner fin al pecado</li>
+            <li>Expiar la iniquidad</li>
+            <li>Traer justicia eterna</li>
+            <li>Sellar visión y profecía</li>
+            <li>Ungir al Santo de los santos</li>
+          </ul>
+
+          <h3>¿Dónde Estará la Iglesia?</h3>
+          <p>Existe debate teológico sobre si la Iglesia pasará por la tribulación:</p>
+          <ul>
+            <li><strong>Pre-tribulacionistas:</strong> La Iglesia será arrebatada antes (1 Tesalonicenses 4:16-17)</li>
+            <li><strong>Mid-tribulacionistas:</strong> Arrebatamiento a mitad del período</li>
+            <li><strong>Post-tribulacionistas:</strong> La Iglesia pasa por toda la tribulación</li>
+          </ul>
+
+          <p>Independientemente de la posición, todos coinciden en que este será un período único en la historia humana, sin paralelo en intensidad de juicio divino.</p>
+
+          <h3>Nuestra Respuesta</h3>
+          <blockquote>
+            "Velad, pues, en todo tiempo orando que seáis tenidos por dignos de escapar de todas estas cosas que vendrán, y de estar en pie delante del Hijo del Hombre." - Lucas 21:36
+          </blockquote>
+        `,
+        image: 'assets/images/20250920_0037_Heavenly%20Clash_remix_01k5jsy0j4eahtsdcsqbfa2rba.png',
+        tags: ['profecia', 'anticristo', 'segunda-venida'],
+        references: [
+          'Daniel 9:24-27',
+          'Apocalipsis 11:2-3',
+          'Apocalipsis 12:6',
+          'Apocalipsis 13:5',
+          'Mateo 24:15-21',
+          '1 Tesalonicenses 4:16-17',
+          'Lucas 21:36'
+        ],
+        readingTime: '15 min'
+      }
+    ];
+
+    // Filter and render studies
+    let filteredStudies = [...studyEntries];
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderStudies(studyEntries);
+      setupStudyFilters();
+    });
+
+    // Render study cards
+    function renderStudies(entries) {
+      const grid = document.getElementById('studiesGrid');
+      if (!grid) return;
+
+      filteredStudies = entries;
+
+      grid.innerHTML = entries.map(entry => `
+        <article class="study-card" onclick="openStudyModal(${entry.id})">
+          <div class="study-card__image" style="background-image: url('${entry.image}')"></div>
+          <div class="study-card__content">
+            <div class="study-card__meta">
+              <time class="study-card__date">${formatDate(entry.date)}</time>
+              <span class="study-card__reading-time">${entry.readingTime}</span>
+            </div>
+            <h3 class="study-card__title">${entry.title}</h3>
+            <div class="study-card__scripture">${entry.scripture}</div>
+            <p class="study-card__excerpt">${entry.excerpt}</p>
+            <div class="study-card__tags">
+              ${entry.tags.map(tag => `<span class="study-tag">${formatTag(tag)}</span>`).join('')}
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      // Animate cards
+      setTimeout(() => {
+        document.querySelectorAll('.study-card').forEach((card, i) => {
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, i * 100);
+        });
+      }, 100);
+    }
+
+    // Setup filters
+    function setupStudyFilters() {
+      document.querySelectorAll('.study-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.study-filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.dataset.filter;
+          if (filter === 'all') {
+            renderStudies(studyEntries);
+          } else {
+            const filtered = studyEntries.filter(entry => entry.tags.includes(filter));
+            renderStudies(filtered);
+          }
+        });
+      });
+    }
+
+    // Open study modal
+    function openStudyModal(id) {
+      const entry = studyEntries.find(e => e.id === id);
+      if (!entry) return;
+
+      document.getElementById('modalDate').textContent = formatDate(entry.date);
+      document.getElementById('modalReadingTime').textContent = entry.readingTime;
+      document.getElementById('modalTitle').textContent = entry.title;
+      document.getElementById('modalScripture').textContent = entry.scripture;
+      document.getElementById('modalTags').innerHTML = entry.tags.map(tag =>
+        `<span class="study-tag">${formatTag(tag)}</span>`
+      ).join('');
+
+      if (entry.image) {
+        document.getElementById('modalImage').innerHTML = `
+          <img src="${entry.image}" alt="${entry.title}">
+        `;
+      } else {
+        document.getElementById('modalImage').innerHTML = '';
+      }
+
+      document.getElementById('modalContent').innerHTML = entry.content;
+      document.getElementById('modalReferences').innerHTML = entry.references.map(ref =>
+        `<span class="scripture-ref">${ref}</span>`
+      ).join('');
+
+      document.getElementById('studyModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close study modal
+    function closeStudyModal() {
+      document.getElementById('studyModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Helper: Format date
+    function formatDate(dateStr) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(dateStr).toLocaleDateString('es-ES', options);
+    }
+
+    // Helper: Format tag
+    function formatTag(tag) {
+      const tagNames = {
+        'anticristo': 'Anticristo',
+        'marca': 'Marca de la Bestia',
+        'tecnologia': 'Tecnología',
+        'profecia': 'Profecía',
+        'segunda-venida': 'Segunda Venida'
+      };
+      return tagNames[tag] || tag;
+    }
+
+    // Close modal on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('studyModal').classList.contains('active')) {
+        closeStudyModal();
       }
     });
   </script>
