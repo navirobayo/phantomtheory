@@ -361,6 +361,52 @@
         particle.style.animation = 'none';
       });
     }
+
+    // ========================================
+    // Scroll-based animations for sections
+    // ========================================
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all content sections
+    document.querySelectorAll('.content-section').forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(30px)';
+      section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+      sectionObserver.observe(section);
+    });
+
+    // ========================================
+    // Enhanced scroll behavior for header
+    // ========================================
+    let lastScroll = 0;
+    const header = document.querySelector('.site-header');
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      // Add shadow when scrolled
+      if (currentScroll > 10) {
+        header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.4)';
+        header.style.borderBottomColor = 'rgba(111, 146, 255, 0.3)';
+      } else {
+        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
+        header.style.borderBottomColor = 'rgba(111, 146, 255, 0.15)';
+      }
+
+      lastScroll = currentScroll;
+    });
   </script>
 
 </body>
