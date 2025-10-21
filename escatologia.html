@@ -33,13 +33,16 @@
     </nav>
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="meta">Estudios Escatológicos</div>
-      <h1>El Fin de los Tiempos y las Profecías Bíblicas</h1>
-      <p class="lead">
-        Mi estudio personal sobre el Apocalipsis, Jesús y el mundo que habitamos.
-      </p>
+  <section class="hero-page">
+    <div class="hero-page__background"></div>
+    <div class="hero-page__content">
+      <div class="hero-glass-card">
+        <div class="meta">Estudios Escatológicos</div>
+        <h1>El Fin de los Tiempos y las Profecías Bíblicas</h1>
+        <p class="lead">
+          Mi estudio personal sobre el Apocalipsis, Jesús y el mundo que habitamos.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -82,6 +85,9 @@
   </footer>
 
   <script>
+    // ========================================
+    // Navigation
+    // ========================================
     function toggleNav() {
       const navMenu = document.getElementById('navMenu');
       navMenu.classList.toggle('open');
@@ -91,6 +97,48 @@
       link.addEventListener('click', () => {
         document.getElementById('navMenu').classList.remove('open');
       });
+    });
+
+    // ========================================
+    // Scroll-based animations
+    // ========================================
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all content sections
+    document.querySelectorAll('.content-section').forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(30px)';
+      section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+      sectionObserver.observe(section);
+    });
+
+    // ========================================
+    // Enhanced header on scroll
+    // ========================================
+    const header = document.querySelector('.site-header');
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > 10) {
+        header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.4)';
+        header.style.borderBottomColor = 'rgba(111, 146, 255, 0.3)';
+      } else {
+        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
+        header.style.borderBottomColor = 'rgba(111, 146, 255, 0.15)';
+      }
     });
   </script>
 

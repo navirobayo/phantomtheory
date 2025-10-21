@@ -446,6 +446,76 @@ a {
   to { opacity: 1; }
 }
 
+/* ========================================
+   HERO FOR INTERNAL PAGES
+   ======================================== */
+
+.hero-page {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 140px 24px 100px;
+}
+
+.hero-page__background {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(111, 146, 255, 0.15), transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(168, 63, 255, 0.1), transparent 50%);
+  z-index: 0;
+}
+
+.hero-page__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-page .hero-glass-card {
+  text-align: center;
+}
+
+.hero-page .hero-glass-card .meta {
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.hero-page .hero-glass-card h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.hero-page .hero-glass-card .lead {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .hero-page {
+    min-height: auto;
+    padding: 100px 20px 80px;
+  }
+
+  .hero-page .hero-glass-card {
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-page {
+    padding: 80px 16px 60px;
+  }
+
+  .hero-page .hero-glass-card {
+    padding: 32px 24px;
+  }
+}
+
 /* Mobile First Responsive Design */
 @media (min-width: 768px) {
   .hero-content-wrapper {
